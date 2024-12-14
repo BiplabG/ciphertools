@@ -1,0 +1,64 @@
+/* Global theme variables */
+:root {
+  --primary-color: #00ff00;
+  --secondary-color: #00cc00;
+  --background-color: #0a0a0a;
+  --surface-color: #1a1a1a;
+  --border-color: #333333;
+  --accent-color: #00ff00;
+  --error-color: #ff3333;
+  
+  --font-primary: 'IBM Plex Mono', 'Courier New', monospace;
+  --spacing-unit: 8px;
+}
+
+/* Reset and base styles */
+body {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  font-family: var(--font-primary);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-unit);
+}
+
+/* Blueprint overrides */
+.bp5-button {
+  font-family: var(--font-primary) !important;
+  background-color: var(--surface-color) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.bp5-button:hover {
+  background-color: var(--border-color) !important;
+}
+
+.bp5-input {
+  background-color: var(--surface-color) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--border-color) !important;
+  font-family: var(--font-primary) !important;
+}
+
+.bp5-menu {
+  background-color: var(--surface-color) !important;
+}
+
+.bp5-menu-item {
+  color: var(--primary-color) !important;
+  font-family: var(--font-primary) !important;
+}
+
+.bp5-menu-item:hover {
+  background-color: var(--border-color) !important;
+}
+
+.bp5-form-group label {
+  color: var(--secondary-color) !important;
+}

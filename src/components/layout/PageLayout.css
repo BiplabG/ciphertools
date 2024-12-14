@@ -1,0 +1,51 @@
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  padding: 48px 0;
+}
+
+.content-section {
+  margin-bottom: 48px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.content-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 24px;
+}
+
+.algorithm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.algorithm-doc-card {
+  background: var(--background-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.algorithm-doc-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+.algorithm-doc-card h4 {
+  color: var(--secondary-color);
+  margin: 16px 0 8px;
+}
+
+.algorithm-doc-card pre {
+  background: var(--surface-color);
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+}

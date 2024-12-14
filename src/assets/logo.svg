@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .logo-text { font: bold 24px 'IBM Plex Mono'; }
+    .logo-symbol { fill: #00ff00; }
+  </style>
+  <circle class="logo-symbol" cx="100" cy="100" r="90" fill="none" stroke="#00ff00" stroke-width="4"/>
+  <path class="logo-symbol" d="M70 80h60v40H70z" fill="none" stroke="#00ff00" stroke-width="4"/>
+  <text x="100" y="105" class="logo-text" text-anchor="middle" fill="#00ff00">CT</text>
+</svg>

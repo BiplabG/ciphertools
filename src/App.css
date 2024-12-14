@@ -1,0 +1,47 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 64px 0;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 0 0 16px;
+  color: var(--primary-color);
+}
+
+.page-description {
+  font-size: 1.125rem;
+  color: var(--secondary-color);
+  margin: 0 0 48px;
+}
+
+.algorithm-content {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.cipher-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.cipher-selector {
+  max-width: 300px;
+  margin: 0 auto;
+}
