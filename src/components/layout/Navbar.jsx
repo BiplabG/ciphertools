@@ -1,16 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar-content">
-        <div className="navbar-brand">CipherTools</div>
+        <Link to="/" className="navbar-brand">CipherTools</Link>
         <div className="navbar-links">
-          <a href="#" className="nav-link">Documentation</a>
-          <a href="#" className="nav-link">GitHub</a>
+          <Link to="/docs" className="nav-link">Documentation</Link>
+          <a href="https://github.com/your-repo" className="nav-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <ThemeToggle />
         </div>
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

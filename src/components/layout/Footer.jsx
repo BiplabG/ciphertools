@@ -1,20 +1,32 @@
-import React from 'react';
-import './Footer.css';
+import { Link } from "react-router-dom";
+import "./Footer.css";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className="footer">
       <div className="container footer-content">
         <div className="footer-info">
-          <p className="footer-copyright">© {new Date().getFullYear()} CipherTools</p>
-          <p className="footer-security">All operations performed client-side</p>
+          <p className="footer-copyright">
+            © {new Date().getFullYear()} CipherTools
+          </p>
+          <p className="footer-security">
+            All operations performed client-side
+          </p>
         </div>
         <div className="footer-links">
-          <a href="#" className="footer-link">Privacy</a>
-          <a href="#" className="footer-link">Security</a>
-          <a href="#" className="footer-link">Terms</a>
+          <Link to="/privacy" className="footer-link">
+            Privacy
+          </Link>
+          <Link to="/security" className="footer-link">
+            Security
+          </Link>
+          <Link to="/docs" className="footer-link">
+            Documentation
+          </Link>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

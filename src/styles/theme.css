@@ -1,15 +1,43 @@
-/* Global theme variables */
+/* Theme variables */
 :root {
-  --primary-color: #00ff00;
-  --secondary-color: #00cc00;
-  --background-color: #0a0a0a;
-  --surface-color: #1a1a1a;
-  --border-color: #333333;
-  --accent-color: #00ff00;
-  --error-color: #ff3333;
-  
+  /* Light theme */
+  --light-primary: #1a1a1a;
+  --light-secondary: #4a4a4a;
+  --light-background: #ffffff;
+  --light-surface: #f5f5f5;
+  --light-border: #e0e0e0;
+  --light-accent: #2d7ff9;
+
+  /* Dark theme */
+  --dark-primary: #00ff00;
+  --dark-secondary: #00cc00;
+  --dark-background: #0a0a0a;
+  --dark-surface: #1a1a1a;
+  --dark-border: #333333;
+  --dark-accent: #00ff00;
+
+  /* Common */
+  --error: #ff3333;
   --font-primary: 'IBM Plex Mono', 'Courier New', monospace;
   --spacing-unit: 8px;
+  
+  /* Default theme (dark) */
+  --primary-color: var(--dark-primary);
+  --secondary-color: var(--dark-secondary);
+  --background-color: var(--dark-background);
+  --surface-color: var(--dark-surface);
+  --border-color: var(--dark-border);
+  --accent-color: var(--dark-accent);
+}
+
+/* Light theme class */
+:root[data-theme="light"] {
+  --primary-color: var(--light-primary);
+  --secondary-color: var(--light-secondary);
+  --background-color: var(--light-background);
+  --surface-color: var(--light-surface);
+  --border-color: var(--light-border);
+  --accent-color: var(--light-accent);
 }
 
 /* Reset and base styles */
@@ -25,6 +53,19 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-unit);
+}
+
+/* Responsive container */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
 }
 
 /* Blueprint overrides */
@@ -48,6 +89,7 @@ body {
 
 .bp5-menu {
   background-color: var(--surface-color) !important;
+  border: 1px solid var(--border-color) !important;
 }
 
 .bp5-menu-item {
@@ -61,4 +103,44 @@ body {
 
 .bp5-form-group label {
   color: var(--secondary-color) !important;
+}
+
+.bp5-tab-list {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.bp5-tab {
+  color: var(--primary-color) !important;
+  font-family: var(--font-primary) !important;
+}
+
+.bp5-tab[aria-selected="true"] {
+  color: var(--accent-color) !important;
+  border-bottom: 2px solid var(--accent-color) !important;
+}
+
+.bp5-html-select select {
+  background-color: var(--surface-color) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--border-color) !important;
+  font-family: var(--font-primary) !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 32px 16px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+  }
+
+  .algorithm-content {
+    padding: 16px;
+  }
+
+  .cipher-form {
+    padding: 16px;
+  }
 }

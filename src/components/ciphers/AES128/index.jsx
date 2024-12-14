@@ -1,7 +1,8 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import { FormGroup, InputGroup, Button, HTMLSelect } from "@blueprintjs/core";
-import CryptoJS from "crypto-js";
-import { MODES } from "./constants";
+import CryptoJS from 'crypto-js';
+import { CIPHER_MODES } from '../../../constants';
+import './styles.css';
 
 const AES128 = () => {
   const [plaintext, setPlaintext] = useState("");
@@ -12,22 +13,22 @@ const AES128 = () => {
   const encrypt = () => {
     try {
       const encrypted = CryptoJS.AES.encrypt(plaintext, key, {
-        mode: CryptoJS.mode[mode],
+        mode: CryptoJS.mode[mode]
       });
       setCiphertext(encrypted.toString());
     } catch (error) {
-      console.error("Encryption failed:", error);
+      console.error('Encryption failed:', error);
     }
   };
 
   const decrypt = () => {
     try {
       const decrypted = CryptoJS.AES.decrypt(ciphertext, key, {
-        mode: CryptoJS.mode[mode],
+        mode: CryptoJS.mode[mode]
       });
       setPlaintext(decrypted.toString(CryptoJS.enc.Utf8));
     } catch (error) {
-      console.error("Decryption failed:", error);
+      console.error('Decryption failed:', error);
     }
   };
 
@@ -56,7 +57,7 @@ const AES128 = () => {
           id="mode"
           value={mode}
           onChange={(e) => setMode(e.target.value)}
-          options={MODES.AES}
+          options={CIPHER_MODES.AES}
           fill={true}
         />
       </FormGroup>

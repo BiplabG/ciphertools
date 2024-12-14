@@ -3,8 +3,8 @@ import { Tabs, Tab } from "@blueprintjs/core";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CipherSelector from "./components/CipherSelector";
 import AlgorithmDescription from "./components/common/AlgorithmDescription";
-import AES128 from "./components/ciphers/AES128";
-import SHA256 from "./components/ciphers/SHA256";
+import algorithmData, { ALGORITHM_CATEGORIES } from "./data/algorithmData";
+import { getCipherComponent } from "./utils/cipherUtils";
 import Privacy from "./pages/Privacy";
 import Security from "./pages/Security";
 import Documentation from "./pages/Documentation";
@@ -15,21 +15,29 @@ import "./styles/theme.css";
 import "./App.css";
 
 function CipherTools() {
-  const [activeTab, setActiveTab] = useState("encryption");
+  const [activeTab, setActiveTab] = useState(ALGORITHM_CATEGORIES.ENCRYPTION);
   const [selectedCipher, setSelectedCipher] = useState(null);
 
-  const renderCipherComponent = () => {
-    if (!selectedCipher) return null;
-
-    switch (selectedCipher.id) {
-      case "aes128":
-        return <AES128 />;
-      case "sha256":
-        return <SHA256 />;
-      default:
-        return <div className="coming-soon">Coming soon...</div>;
-    }
-  };
+  const renderTabContent = (category) => (
+    <>
+      <div className="cipher-selector">
+        <CipherSelector
+          selectedCipher={selectedCipher}
+          onCipherSelect={setSelectedCipher}
+          category={category}
+        />
+      </div>
+      {selectedCipher && (
+        <AlgorithmDescription
+          algorithmId={selectedCipher.id}
+          category={category}
+        />
+      )}
+      <div className="algorithm-content">
+        {selectedCipher && getCipherComponent(selectedCipher.id)}
+      </div>
+    </>
+  );
 
   return (
     <PageLayout>
@@ -51,31 +59,20 @@ function CipherTools() {
         onChange={setActiveTab}
         animate={false}
       >
-        <Tab
-          id="encryption"
-          title="Encryption"
-          panel={
-            <>
-              <div className="cipher-selector">
-                <CipherSelector
-                  selectedCipher={selectedCipher}
-                  onCipherSelect={setSelectedCipher}
-                />
-              </div>
-              {selectedCipher && (
-                <AlgorithmDescription algorithmId={selectedCipher.id} />
-              )}
-              <div className="algorithm-content">{renderCipherComponent()}</div>
-            </>
-          }
-        />
-        {/* Similar structure for other tabs */}
+        {Object.entries(algorithmData).map(([category, { title }]) => (
+          <Tab
+            key={category}
+            id={category}
+            title={title}
+            panel={renderTabContent(category)}
+          />
+        ))}
       </Tabs>
     </PageLayout>
   );
 }
 
-export default function App() {
+function App() {
   return (
     <Router>
       <Routes>
@@ -87,3 +84,5 @@ export default function App() {
     </Router>
   );
 }
+
+export default App;

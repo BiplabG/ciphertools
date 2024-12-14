@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import algorithmData from '../../data/algorithmData';
-import './AlgorithmDescription.css';
+import { getAlgorithmByIdAndCategory } from '../../../utils/algorithmUtils';
+import './styles.css';
 
 const AlgorithmDescription = ({ algorithmId, category }) => {
-  const algorithm = algorithmData[category]?.algorithms.find(algo => algo.id === algorithmId);
+  const algorithm = getAlgorithmByIdAndCategory(algorithmId, category);
 
   if (!algorithm) return null;
 
