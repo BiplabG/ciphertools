@@ -25,6 +25,20 @@ const algorithmData = {
         example: "AES.encrypt('Hello World', 'SecretKey123', { mode: CBC })",
       },
       {
+        id: "aes256",
+        label: "AES-256",
+        name: "AES-256",
+        description:
+          "Advanced Encryption Standard with 256-bit key size. A symmetric block cipher that provides strong security for sensitive data.",
+        features: [
+          "256-bit key size",
+          "Block size: 256 bits",
+          "Multiple modes of operation (CBC, ECB, CFB, OFB, CTR)",
+          "Widely used in TLS/SSL protocols",
+        ],
+        example: "",
+      },
+      {
         id: "des",
         label: "DES",
         name: "DES",

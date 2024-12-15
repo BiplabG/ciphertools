@@ -1,10 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import algorithmData from '../../data/algorithmData';
-import './AlgorithmDescription.css';
+import PropTypes from "prop-types";
+import algorithmData from "../../data/algorithmData";
+import "./AlgorithmDescription.css";
 
 const AlgorithmDescription = ({ algorithmId, category }) => {
-  const algorithm = algorithmData[category]?.algorithms.find(algo => algo.id === algorithmId);
+  const algorithm = algorithmData[category]?.algorithms.find(
+    (algo) => algo.id === algorithmId
+  );
 
   if (!algorithm) return null;
 
@@ -21,7 +22,9 @@ const AlgorithmDescription = ({ algorithmId, category }) => {
       {algorithm.example && (
         <>
           <h3>Example Usage</h3>
-          <pre><code>{algorithm.example}</code></pre>
+          <pre>
+            <code>{algorithm.example}</code>
+          </pre>
         </>
       )}
     </div>
@@ -30,7 +33,7 @@ const AlgorithmDescription = ({ algorithmId, category }) => {
 
 AlgorithmDescription.propTypes = {
   algorithmId: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired
+  category: PropTypes.string.isRequired,
 };
 
 export default AlgorithmDescription;
