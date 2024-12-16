@@ -1,23 +1,37 @@
 import { useState, useEffect } from "react";
-import { FormGroup, TextArea } from "@blueprintjs/core";
+import { FormGroup, TextArea, HTMLSelect } from "@blueprintjs/core";
 import CryptoJS from "crypto-js";
 
-export default function SHA256() {
+const HASH_LENGTHS = ["224", "256", "384", "512"];
+
+export default function SHA3() {
   const [input, setInput] = useState("");
   const [hash, setHash] = useState("");
+  const [hashLength, setHashLength] = useState("512");
 
   useEffect(() => {
     if (input) {
-      const hashValue = CryptoJS.SHA256(input).toString();
+      const hashValue = CryptoJS.SHA3(input, {
+        outputLength: Number(hashLength),
+      }).toString();
       setHash(hashValue);
     } else {
       setHash("");
     }
-  }, [input]);
+  }, [input, hashLength]);
 
   return (
     <div className="cipher-form">
-      <h2>SHA-256</h2>
+      <h2>SHA3 (Keccak[c=2d])</h2>
+      <FormGroup label="Output hash length" labelFor="hash-length">
+        <HTMLSelect
+          id="hash-length"
+          value={hashLength}
+          onChange={(e) => setHashLength(e.target.value)}
+          options={HASH_LENGTHS}
+          fill={true}
+        />
+      </FormGroup>
       <FormGroup label="Input Text" labelFor="input">
         <TextArea
           id="input"

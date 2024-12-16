@@ -7,10 +7,10 @@ const Footer = () => {
       <div className="container footer-content">
         <div className="footer-info">
           <p className="footer-copyright">
-            © {new Date().getFullYear()} CipherTools
+            © {new Date().getFullYear()} QuickCipherTools
           </p>
           <p className="footer-security">
-            All operations performed client-side
+            All operations performed offline in the browser.
           </p>
         </div>
         <div className="footer-links">
@@ -20,8 +20,8 @@ const Footer = () => {
           <Link to="/security" className="footer-link">
             Security
           </Link>
-          <Link to="/docs" className="footer-link">
-            Documentation
+          <Link to="/about" className="footer-link">
+            About
           </Link>
         </div>
       </div>

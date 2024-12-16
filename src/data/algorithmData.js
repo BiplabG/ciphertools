@@ -70,6 +70,15 @@ const algorithmData = {
         example: "SHA256('Hello World')",
       },
       {
+        id: "sha3",
+        label: "SHA3",
+        name: "SHA3 (Keccak[c=2d])",
+        description:
+          "SHA-3 is the winner of a five-year competition to select a new cryptographic hash algorithm where 64 competing designs were evaluated.",
+        features: [],
+        example: "",
+      },
+      {
         id: "md5",
         label: "MD5",
         name: "MD5",

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { FormGroup, InputGroup, Button, HTMLSelect } from "@blueprintjs/core";
+import {
+  FormGroup,
+  InputGroup,
+  Button,
+  HTMLSelect,
+  TextArea,
+} from "@blueprintjs/core";
 import CryptoJS from "crypto-js";
 import "./styles.css";
 
@@ -11,6 +17,8 @@ const PADDING_OPTIONS = [
   "NoPadding",
   "ZeroPadding",
 ];
+const INPUT_FORMATS = ["UTF-8 (plain text)", "hex (binary)"];
+const OUTPUT_FORMATS = ["Base64", "hex (binary)"];
 
 const AES128 = () => {
   const [plaintext, setPlaintext] = useState("");
@@ -19,6 +27,14 @@ const AES128 = () => {
   const [iv, setIv] = useState("");
   const [mode, setMode] = useState("CBC");
   const [padding, setPadding] = useState("Pkcs7");
+  const [inputFormat, setInputFormat] = useState("UTF-8 (plain text)");
+  const [outputFormat, setOutputFormat] = useState("Base64");
+
+  const formatToCryptoJS = {
+    "UTF-8 (plain text)": CryptoJS.enc.Utf8,
+    "hex (binary)": CryptoJS.enc.Hex,
+    Base64: CryptoJS.enc.Base64,
+  };
 
   const encrypt = () => {
     try {
@@ -28,15 +44,21 @@ const AES128 = () => {
       };
 
       if (mode !== "ECB") {
-        options.iv = CryptoJS.enc.Hex.parse(iv);
+        options.iv = formatToCryptoJS["hex (binary)"].parse(iv);
       }
 
+      const keyParsed = formatToCryptoJS["hex (binary)"].parse(key);
+      const plaintextParsed = formatToCryptoJS[inputFormat].parse(plaintext);
+
       const encrypted = CryptoJS.AES.encrypt(
-        plaintext,
-        CryptoJS.enc.Hex.parse(key),
+        plaintextParsed,
+        keyParsed,
         options
       );
-      setCiphertext(encrypted.toString());
+
+      setCiphertext(
+        encrypted.ciphertext.toString(formatToCryptoJS[outputFormat])
+      );
     } catch (error) {
       console.error("Encryption failed:", error);
     }
@@ -50,15 +72,20 @@ const AES128 = () => {
       };
 
       if (mode !== "ECB") {
-        options.iv = CryptoJS.enc.Hex.parse(iv);
+        options.iv = formatToCryptoJS["hex (binary)"].parse(iv);
       }
 
+      const keyParsed = formatToCryptoJS["hex (binary)"].parse(key);
+      const ciphertextParsed =
+        formatToCryptoJS["hex (binary)"].parse(ciphertext);
+
       const decrypted = CryptoJS.AES.decrypt(
-        ciphertext,
-        CryptoJS.enc.Hex.parse(key),
+        { ciphertext: ciphertextParsed },
+        keyParsed,
         options
       );
-      setPlaintext(decrypted.toString(CryptoJS.enc.Utf8));
+
+      setPlaintext(decrypted.toString(formatToCryptoJS[inputFormat]));
     } catch (error) {
       console.error("Decryption failed:", error);
     }
@@ -68,14 +95,37 @@ const AES128 = () => {
 
   return (
     <div className="cipher-form">
-      <FormGroup label="Plain Text" labelFor="plaintext">
-        <InputGroup
-          id="plaintext"
-          value={plaintext}
-          onChange={(e) => setPlaintext(e.target.value)}
-          fill={true}
-        />
-      </FormGroup>
+      <h2>AES-128</h2>
+
+      <div className="two-column-group">
+        <FormGroup
+          label="Mode of Operation"
+          labelFor="mode"
+          className="width-hundred-percent"
+        >
+          <HTMLSelect
+            id="mode"
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
+            options={MODES}
+            fill={true}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label="Padding Scheme"
+          labelFor="padding"
+          className="width-hundred-percent"
+        >
+          <HTMLSelect
+            id="padding"
+            value={padding}
+            onChange={(e) => setPadding(e.target.value)}
+            options={PADDING_OPTIONS}
+            fill={true}
+          />
+        </FormGroup>
+      </div>
 
       <FormGroup label="Key (Hex)" labelFor="key">
         <InputGroup
@@ -102,34 +152,63 @@ const AES128 = () => {
         />
       </FormGroup>
 
-      <FormGroup label="Mode of Operation" labelFor="mode">
-        <HTMLSelect
-          id="mode"
-          value={mode}
-          onChange={(e) => setMode(e.target.value)}
-          options={MODES}
-          fill={true}
-        />
-      </FormGroup>
+      <div className="two-column-group">
+        <FormGroup
+          label="Input Format"
+          labelFor="input-format"
+          className="width-hundred-percent"
+        >
+          <HTMLSelect
+            id="input-format"
+            value={inputFormat}
+            onChange={(e) => setInputFormat(e.target.value)}
+            options={INPUT_FORMATS}
+            fill={true}
+          />
+        </FormGroup>
 
-      <FormGroup label="Padding Scheme" labelFor="padding">
-        <HTMLSelect
-          id="padding"
-          value={padding}
-          onChange={(e) => setPadding(e.target.value)}
-          options={PADDING_OPTIONS}
-          fill={true}
-        />
-      </FormGroup>
+        <FormGroup
+          label="Output Format"
+          labelFor="output-format"
+          className="width-hundred-percent"
+        >
+          <HTMLSelect
+            id="output-format"
+            value={outputFormat}
+            onChange={(e) => setOutputFormat(e.target.value)}
+            options={OUTPUT_FORMATS}
+            fill={true}
+          />
+        </FormGroup>
+      </div>
 
-      <FormGroup label="Cipher Text" labelFor="ciphertext">
-        <InputGroup
-          id="ciphertext"
-          value={ciphertext}
-          onChange={(e) => setCiphertext(e.target.value)}
-          fill={true}
-        />
-      </FormGroup>
+      <div className="two-column-group">
+        <FormGroup
+          label="Plain Text"
+          labelFor="plaintext"
+          className="width-hundred-percent"
+        >
+          <TextArea
+            id="plaintext"
+            value={plaintext}
+            onChange={(e) => setPlaintext(e.target.value)}
+            fill={true}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label="Cipher Text"
+          labelFor="ciphertext"
+          className="width-hundred-percent"
+        >
+          <TextArea
+            id="ciphertext"
+            value={ciphertext}
+            onChange={(e) => setCiphertext(e.target.value)}
+            fill={true}
+          />
+        </FormGroup>
+      </div>
 
       <div className="button-group">
         <Button intent="primary" onClick={encrypt} icon="lock">

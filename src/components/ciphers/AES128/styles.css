@@ -9,3 +9,15 @@
   margin-top: 24px;
   justify-content: center;
 }
+
+.two-column-group {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.width-hundred-percent {
+  width: 100%;
+}

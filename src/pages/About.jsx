@@ -2,17 +2,17 @@ import PageLayout from "../components/layout/PageLayout";
 import { Card } from "@blueprintjs/core";
 import algorithmData from "../data/algorithmData";
 
-export default function Documentation() {
+export default function About() {
   return (
     <PageLayout>
       <div className="page-content">
-        <h1 className="page-title">Documentation</h1>
+        <h1 className="page-title">About</h1>
 
         {Object.entries(algorithmData).map(([category, algorithms]) => (
           <div key={category} className="content-section">
             <h2>{category}</h2>
             <div className="algorithm-grid">
-              {algorithms.map((algo) => (
+              {algorithms["algorithms"].map((algo) => (
                 <Card key={algo.id} className="algorithm-doc-card">
                   <h3>{algo.name}</h3>
                   <p>{algo.description}</p>

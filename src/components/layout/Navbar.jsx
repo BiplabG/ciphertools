@@ -7,11 +7,11 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container navbar-content">
         <Link to="/" className="navbar-brand">
-          CipherTools
+          QuickCipherTools
         </Link>
         <div className="navbar-links">
-          <Link to="/docs" className="nav-link">
-            Documentation
+          <Link to="/about" className="nav-link">
+            About
           </Link>
           <a
             href="https://github.com/your-repo"
